@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_dashboard" name="shell-type">
+  <title>Air Presenter - Spatial Studio OS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet">
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface": "#e3e1e9",
+            "surface-tint": "#00dbe9",
+            "surface-container-lowest": "#0d0e13",
+            "primary-fixed": "#7df4ff",
+            "on-surface-variant": "#b9cacb",
+            "on-secondary-container": "#e6ecff",
+            "on-secondary": "#002e6a",
+            "on-primary-container": "#006970",
+            "primary-fixed-dim": "#00dbe9",
+            "on-tertiary-fixed": "#002113",
+            "surface-container-highest": "#34343a",
+            "on-tertiary-container": "#006d4a",
+            "surface-dim": "#121318",
+            "secondary-container": "#0566d9",
+            "primary": "#dbfcff",
+            "on-tertiary": "#003824",
+            "tertiary-container": "#65f2b5",
+            "secondary-fixed": "#d8e2ff",
+            "inverse-primary": "#006970",
+            "tertiary-fixed-dim": "#4edea3",
+            "surface-container-high": "#292a2f",
+            "secondary-fixed-dim": "#adc6ff",
+            "surface-container-low": "#1a1b21",
+            "on-primary": "#00363a",
+            "outline": "#849495",
+            "inverse-on-surface": "#2f3036",
+            "tertiary-fixed": "#6ffbbe",
+            "outline-variant": "#3b494b",
+            "surface-variant": "#34343a",
+            "on-secondary-fixed-variant": "#004395",
+            "on-primary-fixed-variant": "#004f54",
+            "error": "#ffb4ab",
+            "secondary": "#adc6ff",
+            "inverse-surface": "#e3e1e9",
+            "surface": "#121318",
+            "tertiary": "#d8ffe7",
+            "on-tertiary-fixed-variant": "#005236",
+            "error-container": "#93000a",
+            "background": "#121318",
+            "primary-container": "#00f0ff",
+            "on-background": "#e3e1e9",
+            "on-error-container": "#ffdad6",
+            "surface-bright": "#38393f",
+            "on-primary-fixed": "#002022",
+            "on-error": "#690005",
+            "on-secondary-fixed": "#001a42",
+            "surface-container": "#1e1f25"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "gutter-mobile": "0.75rem",
+            "space-md": "1rem",
+            "gutter": "1.25rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem"
+          },
+          fontFamily: {
+            "telemetry-timer-mobile": ["JetBrains Mono"],
+            "body-sm": ["Geist"],
+            "telemetry-timer": ["JetBrains Mono"],
+            "display-stage": ["Space Grotesk"],
+            "label-status": ["JetBrains Mono"],
+            "headline-sm": ["Space Grotesk"],
+            "body-lg": ["Geist"],
+            "display-stage-mobile": ["Space Grotesk"],
+            "headline-md": ["Space Grotesk"],
+            "label-hud": ["JetBrains Mono"],
+            "headline-lg": ["Space Grotesk"],
+            "body-md": ["Geist"],
+            "headline-lg-mobile": ["Space Grotesk"]
+          },
+          fontSize: {
+            "telemetry-timer-mobile": ["28px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "telemetry-timer": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "display-stage": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-status": ["10px", { "lineHeight": "12px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-stage-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-hud": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary">
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest/90 backdrop-blur-2xl z-50 flex flex-col justify-between p-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="flex flex-col gap-space-lg">
+      <div class="flex items-center gap-space-sm px-space-xs">
+        <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+        <span class="font-label-hud text-label-hud uppercase tracking-widest text-primary">Spatial Studio OS</span>
+      </div>
+      <nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded-xl">
+        <a aria-current="page" class="px-space-md py-space-sm transition-all bg-primary-container text-on-primary-container font-bold rounded-xl" data-path="live-stage" href="#">Live Stage</a>
+        <a class="px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-md text-body-md" data-path="gesture-calibration" href="#">Gesture Matrix</a>
+        <a class="px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-md text-body-md" data-path="slide-sequencer" href="#">Slide Sequencer</a>
+        <a class="px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-md text-body-md" data-path="telemetry-analytics" href="#">Stage Telemetry</a>
+        <a class="px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-md text-body-md" data-path="device-manager" href="#">Sensor Hardware</a>
+      </nav>
+    </div>
+    <div class="bg-surface-container-low/80 backdrop-blur-md p-space-md rounded-xl flex flex-col gap-space-sm">
+      <div class="flex items-center justify-between">
+        <span class="font-label-status text-label-status text-on-surface-variant">LATENCY</span>
+        <span class="font-label-status text-label-status text-tertiary-fixed">4.2 MS</span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="font-label-status text-label-status text-on-surface-variant">HUD ENGINE</span>
+        <span class="font-label-status text-label-status text-primary">ARMED</span>
+      </div>
+      <div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+        <div class="w-4/5 h-full bg-primary-container"></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="pl-64 flex flex-col min-h-screen">
+    <!-- HEADER -->
+    <header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+      <div class="flex items-center gap-space-lg">
+        <div class="flex items-center gap-space-sm">
+          <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">Air Presenter</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-space-lg">
+        <div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-space-xs rounded-xl">
+          <span class="material-symbols-outlined text-primary-container text-body-lg">timer</span>
+          <span class="font-label-hud text-label-hud text-primary tracking-wider" id="header-timer">00:14:32</span>
+        </div>
+        <div class="flex items-center bg-surface-container-high rounded-lg p-0.5">
+          <button class="px-space-sm py-1 rounded font-label-status text-label-status bg-primary-container text-on-primary-container font-bold">STAGE</button>
+          <button class="px-space-sm py-1 rounded font-label-status text-label-status text-on-surface-variant hover:text-on-surface">AUDIENCE</button>
+        </div>
+        <div class="flex items-center gap-space-xs">
+          <button class="px-space-sm py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-hud text-label-hud flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined text-body-md">videocam</span>Camera
+          </button>
+          <button class="px-space-sm py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-hud text-label-hud flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined text-body-md">view_in_ar</span>Calibrate
+          </button>
+          <button class="px-space-sm py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-hud text-label-hud flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined text-body-md">fullscreen</span>Stage
+          </button>
+          <button class="px-space-md py-1.5 rounded-lg bg-secondary-container hover:bg-surface-container-high text-on-secondary-container hover:text-on-surface font-label-hud text-label-hud flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined text-body-md">share</span>Share
+          </button>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="relative w-full pt-16 bg-surface flex-1 px-space-lg pb-24">
+      <div class="flex flex-col w-full">
+        <div class="grid grid-cols-12 gap-space-md py-space-sm">
+          
+          <!-- TOP TACTICAL TELEMETRY STRIP -->
+          <div class="col-span-12 flex items-center justify-between bg-surface-container-lowest/80 backdrop-blur-md px-space-md py-space-xs rounded-xl shadow-md">
+            <div class="flex items-center gap-space-md">
+              <div class="flex items-center gap-space-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse shadow-[0_0_8px_#00f0ff]"></span>
+                <span class="font-label-hud text-label-hud text-primary tracking-widest uppercase">AIR SENSOR MATRIX: OPTICAL ONLINE</span>
+              </div>
+              <div class="h-3 w-px bg-surface-container-highest"></div>
+              <div class="flex items-center gap-1.5 font-label-status text-label-status text-on-surface-variant">
+                <span class="material-symbols-outlined text-body-md text-tertiary-fixed">sensors</span>
+                <span>WEBCAM CV: 60 FPS (1080P)</span>
+              </div>
+              <div class="flex items-center gap-1.5 font-label-status text-label-status text-on-surface-variant">
+                <span class="material-symbols-outlined text-body-md text-primary-container">sync</span>
+                <span>SLIDE LINK: SYNCHRONIZED</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-space-xs">
+              <button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high font-label-status text-label-status text-primary flex items-center gap-1 transition-all" id="btn-laser">
+                <span class="material-symbols-outlined text-body-sm text-primary-container">adjust</span>
+                AIR LASER (L)
+              </button>
+              <button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high font-label-status text-label-status text-on-surface flex items-center gap-1 transition-all" id="btn-highlight">
+                <span class="material-symbols-outlined text-body-sm">highlight</span>
+                HIGHLIGHT
+              </button>
+              <button class="px-space-sm py-1 rounded-lg bg-surface-container hover:bg-error-container text-on-surface hover:text-on-error-container font-label-status text-label-status flex items-center gap-1 transition-all" id="btn-blackout">
+                <span class="material-symbols-outlined text-body-sm">visibility_off</span>
+                BLACKOUT (B)
+              </button>
+              <div class="h-3 w-px bg-surface-container-highest mx-1"></div>
+              <span class="px-space-xs py-0.5 rounded bg-surface-container-high font-label-status text-label-status text-primary-fixed">16:9 4K CINEMA MODE</span>
+            </div>
+          </div>
+
+          <!-- MAIN STAGE (9 COLS) -->
+          <div class="col-span-12 xl:col-span-9 flex flex-col gap-space-sm">
+            <!-- 16:9 SLIDE VIEWPORT -->
+            <div class="relative w-full aspect-[16/9] bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden flex flex-col justify-between p-space-xl group select-none transition-all duration-300" id="slide-stage">
+              <!-- Ambient stage backdrop glow -->
+              <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+              <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary-container/15 rounded-full blur-3xl pointer-events-none"></div>
+              
+              <!-- Cybernetic Corner Reticles -->
+              <div class="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-primary-container pointer-events-none opacity-80"></div>
+              <div class="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-primary-container pointer-events-none opacity-80"></div>
+              <div class="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-primary-container pointer-events-none opacity-80"></div>
+              <div class="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-primary-container pointer-events-none opacity-80"></div>
+
+              <!-- Slide Overlay HUD Top -->
+              <div class="relative z-10 flex items-center justify-between">
+                <div class="flex items-center gap-space-sm">
+                  <span class="font-label-hud text-label-hud px-space-sm py-0.5 rounded-full bg-surface-container-high/90 text-primary-fixed-dim backdrop-blur-md" id="slide-counter">
+                    SLIDE 04 / 28
+                  </span>
+                  <span class="font-label-status text-label-status text-on-surface-variant uppercase tracking-wider">
+                    ENTERPRISE KEYNOTE DECK • SECTION 2: ARCHITECTURE
+                  </span>
+                </div>
+                <div class="flex items-center gap-space-xs bg-surface-container-low/80 backdrop-blur-md px-space-sm py-0.5 rounded-full">
+                  <span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed"></span>
+                  <span class="font-label-status text-label-status text-on-surface-variant">AIR CLICK ACCELERATION ON</span>
+                </div>
+              </div>
+
+              <!-- Simulated Active Laser Dot -->
+              <div class="absolute w-4 h-4 bg-primary-container rounded-full shadow-[0_0_16px_4px_#00f0ff] pointer-events-none transition-all duration-75 z-30" id="laser-dot" style="top: 230px; left: 574px;">
+                <div class="absolute -inset-1 rounded-full border border-primary-container/60 animate-ping"></div>
+              </div>
+
+              <!-- SLIDE CONTENT CANVAS -->
+              <div class="relative z-10 my-auto flex flex-col gap-space-md px-space-md">
+                <div class="flex flex-col gap-space-xs">
+                  <div class="inline-flex items-center gap-2">
+                    <span class="h-1 w-8 bg-primary-container rounded-full"></span>
+                    <span class="font-label-hud text-label-hud tracking-widest text-primary-fixed uppercase">SYSTEM BREAKTHROUGH</span>
+                  </div>
+                  <h1 class="font-display-stage text-display-stage text-primary leading-tight font-extrabold tracking-tight max-w-4xl" id="slide-title">
+                    Autonomous Interface Systems &amp; Spatial Interaction
+                  </h1>
+                  <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl font-light" id="slide-desc">
+                    Transforming low-latency camera telemetry into natural air gestures with millisecond spatial fidelity and zero calibration overhead.
+                  </p>
+                </div>
+
+                <!-- Slide Metrics & Architecture Grid -->
+                <div class="grid grid-cols-3 gap-space-md pt-space-xs">
+                  <div class="bg-surface-container/70 backdrop-blur-md rounded-xl p-space-md flex flex-col justify-between shadow-lg border border-surface-container-highest/40">
+                    <div class="flex items-center justify-between">
+                      <span class="font-label-hud text-label-hud text-on-surface-variant">THROUGHPUT GAIN</span>
+                      <span class="material-symbols-outlined text-primary-container text-body-lg">trending_up</span>
+                    </div>
+                    <div class="mt-space-sm">
+                      <div class="font-telemetry-timer text-telemetry-timer text-primary font-bold tracking-tight">+142%</div>
+                      <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Presenter transition speed vs. physical remotes</p>
+                    </div>
+                    <div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+                      <div class="bg-primary-container h-full w-[85%] rounded-full"></div>
+                    </div>
+                  </div>
+
+                  <div class="bg-surface-container/70 backdrop-blur-md rounded-xl p-space-md flex flex-col justify-between shadow-lg border border-surface-container-highest/40">
+                    <div class="flex items-center justify-between">
+                      <span class="font-label-hud text-label-hud text-on-surface-variant">TRACKING LATENCY</span>
+                      <span class="material-symbols-outlined text-tertiary-fixed text-body-lg">bolt</span>
+                    </div>
+                    <div class="mt-space-sm">
+                      <div class="font-telemetry-timer text-telemetry-timer text-tertiary-fixed font-bold tracking-tight">&lt;11.4ms</div>
+                      <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">End-to-end edge inference on local WebAssembly runtime</p>
+                    </div>
+                    <div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+                      <div class="bg-tertiary-fixed h-full w-[94%] rounded-full"></div>
+                    </div>
+                  </div>
+
+                  <div class="bg-surface-container/70 backdrop-blur-md rounded-xl p-space-md flex flex-col justify-between shadow-lg border border-surface-container-highest/40">
+                    <div class="flex items-center justify-between">
+                      <span class="font-label-hud text-label-hud text-on-surface-variant">PHYSICAL APPARATUS</span>
+                      <span class="material-symbols-outlined text-secondary text-body-lg">do_not_touch</span>
+                    </div>
+                    <div class="mt-space-sm">
+                      <div class="font-telemetry-timer text-telemetry-timer text-secondary font-bold tracking-tight">Zero</div>
+                      <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Touch-free spatial air control via standard HD webcams</p>
+                    </div>
+                    <div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+                      <div class="bg-secondary h-full w-full rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide Overlay Bottom & Scrubber Bar -->
+              <div class="relative z-10 flex flex-col gap-space-xs pt-space-sm">
+                <div class="w-full bg-surface-container-highest/60 h-1 rounded-full overflow-hidden flex cursor-pointer">
+                  <div class="h-full bg-primary-container" style="width: 14.28%;"></div>
+                  <div class="h-full bg-surface-container-high" style="width: 85.72%;"></div>
+                </div>
+                <div class="flex items-center justify-between text-on-surface-variant font-label-status text-label-status">
+                  <span>KEYNOTE TIMELINE: 14m 32s ELAPSED (TARGET: 30m 00s)</span>
+                  <span>NEXT TRIGGER: PALM SWIPE FOR GLOBAL TOPOLOGY</span>
+                </div>
+              </div>
+
+              <!-- Slide Navigation Overlay Steppers -->
+              <div class="absolute inset-y-0 left-2 flex items-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                <button class="pointer-events-auto p-space-sm rounded-full bg-surface-container-high/90 text-on-surface hover:bg-primary-container hover:text-on-primary-container shadow-xl transition-all" id="slide-prev">
+                  <span class="material-symbols-outlined text-headline-sm">arrow_back</span>
+                </button>
+              </div>
+              <div class="absolute inset-y-0 right-2 flex items-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                <button class="pointer-events-auto p-space-sm rounded-full bg-surface-container-high/90 text-on-surface hover:bg-primary-container hover:text-on-primary-container shadow-xl transition-all" id="slide-next">
+                  <span class="material-symbols-outlined text-headline-sm">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- PRESENTER COMPANION DECK / NOTES & TELEMETRY -->
+            <div class="grid grid-cols-12 gap-space-md">
+              <!-- Live Speaker Confidence Notes -->
+              <div class="col-span-12 md:col-span-8 bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-space-xs">
+                  <div class="flex items-center gap-space-xs">
+                    <span class="material-symbols-outlined text-primary-container text-body-md">speaker_notes</span>
+                    <span class="font-label-hud text-label-hud text-primary font-bold uppercase tracking-wider">SPEAKER TELEPROMPTER CONFIDENCE NOTES</span>
+                  </div>
+                  <span class="font-label-status text-label-status px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">AUTO-SCROLL SYNC</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface leading-relaxed" id="teleprompter-text">
+                  "Remind the team on <strong class="text-primary font-semibold">Slide 5</strong> about the SDK rollout roadmap; emphasize zero-latency WebAssembly hand gesture engine running entirely client-side. Reiterate that no video stream ever leaves local RAM."
+                </p>
+                <div class="flex items-center gap-space-md pt-space-xs text-on-surface-variant font-label-status text-label-status">
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary-fixed"></span> SPEECH CADENCE: 138 WPM (BALANCED)</span>
+                  <span class="flex items-center gap-1"><span class="material-symbols-outlined text-body-sm">mic</span> VOCAL PROJECTION: OPTIMAL (-6 dB)</span>
+                </div>
+              </div>
+
+              <!-- Upcoming Slide Queue Strip -->
+              <div class="col-span-12 md:col-span-4 bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-space-xs">
+                  <span class="font-label-hud text-label-hud text-on-surface-variant uppercase tracking-wider">UP NEXT (SLIDE 05)</span>
+                  <span class="font-label-status text-label-status text-primary-fixed">SWIPE RIGHT READY</span>
+                </div>
+                <div class="relative w-full aspect-video bg-surface-container-highest rounded-lg overflow-hidden p-space-sm flex flex-col justify-between shadow-inner">
+                  <div class="text-[9px] font-label-hud text-primary uppercase tracking-widest">Global Architecture &amp; Edge nodes</div>
+                  <div class="flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary/40 text-[32px]">hub</span>
+                  </div>
+                  <div class="text-[9px] font-mono text-on-surface-variant text-right">3 Diagrams • 4 Benchmarks</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TACTICAL WING: DEDICATED WEBCAM GESTURE BLACK BOX (3 COLS) -->
+          <div class="col-span-12 xl:col-span-3 flex flex-col gap-space-md">
+            <!-- DEDICATED GESTURE CAMERA BLACK BOX -->
+            <div class="relative bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden p-space-sm flex flex-col gap-space-xs border border-surface-container-highest/30">
+              <!-- Glowing Corner Reticles -->
+              <div class="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-primary-container z-20"></div>
+              <div class="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-primary-container z-20"></div>
+              <div class="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-primary-container z-20"></div>
+              <div class="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-primary-container z-20"></div>
+
+              <!-- Black Box Header -->
+              <div class="flex items-center justify-between px-space-xs pt-1">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+                  <span class="font-label-hud text-label-hud text-primary font-bold">WEBCAM GESTURE SENSOR</span>
+                </div>
+                <span class="font-label-status text-label-status px-1.5 py-0.5 rounded bg-surface-container-high text-tertiary-fixed">FEED READY</span>
+              </div>
+
+              <!-- Camera Viewport Canvas with Hand Tracking Overlay -->
+              <div class="relative w-full aspect-video bg-surface-dim rounded-lg overflow-hidden flex items-center justify-center">
+                <div class="w-full h-full bg-gradient-to-br from-surface-container-lowest via-surface-dim to-surface-container-high opacity-80 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-surface-container-highest text-5xl">videocam</span>
+                </div>
+                
+                <!-- Interactive Hand Landmark Simulation SVG Overlay -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none" fill="none" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Grid Lines -->
+                  <path d="M 0 90 L 320 90" stroke="rgba(0, 240, 255, 0.12)" stroke-dasharray="4 4"></path>
+                  <path d="M 160 0 L 160 180" stroke="rgba(0, 240, 255, 0.12)" stroke-dasharray="4 4"></path>
+                  
+                  <!-- Hand Tracking Skeletal Coordinates -->
+                  <circle class="animate-pulse" cx="160" cy="100" fill="#00f0ff" r="4"></circle>
+                  <circle cx="160" cy="100" opacity="0.6" r="10" stroke="#00f0ff" stroke-width="1"></circle>
+                  
+                  <!-- Wrist to Knuckles -->
+                  <line stroke="#00f0ff" stroke-opacity="0.8" stroke-width="1.5" x1="160" x2="160" y1="150" y2="100"></line>
+                  <line stroke="#00f0ff" stroke-opacity="0.8" stroke-width="1.5" x1="160" x2="135" y1="100" y2="70"></line>
+                  <line stroke="#00f0ff" stroke-opacity="0.8" stroke-width="1.5" x1="160" x2="155" y1="100" y2="55"></line>
+                  <line stroke="#00f0ff" stroke-opacity="0.8" stroke-width="1.5" x1="160" x2="175" y1="100" y2="58"></line>
+                  <line stroke="#00f0ff" stroke-opacity="0.8" stroke-width="1.5" x1="160" x2="195" y1="100" y2="75"></line>
+                  
+                  <!-- Finger Tips Nodes -->
+                  <circle cx="135" cy="70" fill="#6ffbbe" r="3"></circle>
+                  <circle cx="155" cy="55" fill="#6ffbbe" r="3"></circle>
+                  <circle cx="175" cy="58" fill="#6ffbbe" r="3"></circle>
+                  <circle cx="195" cy="75" fill="#6ffbbe" r="3"></circle>
+                  
+                  <!-- Gesture Bounding Box HUD -->
+                  <rect height="120" opacity="0.5" rx="4" stroke="#00f0ff" stroke-dasharray="2 2" stroke-width="1" width="100" x="115" y="40"></rect>
+                  <text fill="#00f0ff" font-family="JetBrains Mono" font-size="8" font-weight="600" x="120" y="52">HAND_01 [LOCK: 98.4%]</text>
+                  <text fill="#b9cacb" font-family="JetBrains Mono" font-size="7" x="120" y="152">POS: X:0.52 Y:0.41 Z:0.18</text>
+                </svg>
+
+                <!-- Top-Right Live Stream Metric Badges -->
+                <div class="absolute top-2 right-2 flex flex-col items-end gap-1">
+                  <span class="font-label-status text-[9px] px-1.5 py-0.5 rounded bg-surface-container-lowest/90 text-primary-fixed-dim backdrop-blur-md">
+                    60 FPS • AI v2.4
+                  </span>
+                </div>
+
+                <!-- Bottom Floating Detected Gesture Tag -->
+                <div class="absolute bottom-2 left-2 right-2 bg-surface-container-lowest/90 backdrop-blur-md px-space-xs py-1 rounded flex items-center justify-between">
+                  <div class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-primary-container text-body-sm">gesture</span>
+                    <span class="font-label-status text-label-status text-primary font-bold">DETECTED: PINCH TO LASER</span>
+                  </div>
+                  <span class="font-label-status text-[9px] text-tertiary-fixed font-mono">LATENCY: 3.8ms</span>
+                </div>
+              </div>
+
+              <!-- Hardware Source Selector & Sensitivity Control -->
+              <div class="flex flex-col gap-space-xs p-space-xs bg-surface-container-low rounded-lg">
+                <div class="flex items-center justify-between">
+                  <span class="font-label-hud text-label-hud text-on-surface-variant flex items-center gap-1">
+                    <span class="material-symbols-outlined text-body-sm">videocam</span> SENSOR INPUT
+                  </span>
+                  <span class="font-label-status text-label-status text-primary">FaceTime HD (Built-in)</span>
+                </div>
+                <div class="flex items-center justify-between text-on-surface-variant pt-1">
+                  <span class="font-label-hud text-label-hud">GESTURE SENSITIVITY</span>
+                  <span class="font-label-status text-label-status text-primary font-mono" id="sens-val">82%</span>
+                </div>
+                <!-- Sensitivity Range Slider -->
+                <div class="relative w-full flex items-center py-1">
+                  <div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+                    <div class="bg-primary-container h-full w-[82%] rounded-full shadow-[0_0_8px_#00f0ff]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AIR GESTURES RECOGNITION MATRIX REFERENCE GUIDE -->
+              <div class="flex flex-col gap-1.5 pt-space-xs">
+                <span class="font-label-hud text-label-hud text-on-surface-variant uppercase tracking-wider px-space-xs">
+                  AIR GESTURE MAPPER
+                </span>
+                <div class="flex flex-col gap-1">
+                  <div class="flex items-center justify-between px-space-xs py-1 rounded bg-surface-container/60 hover:bg-surface-container-high transition-colors">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-primary-container text-body-sm">swipe_left</span>
+                      <span class="font-body-sm text-body-sm text-on-surface">Thumbs Down</span>
+                    </div>
+                    <span class="font-label-status text-label-status text-on-surface-variant">Prev Slide</span>
+                  </div>
+                  <div class="flex items-center justify-between px-space-xs py-1 rounded bg-surface-container/60 hover:bg-surface-container-high transition-colors">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-primary-container text-body-sm">swipe_right</span>
+                      <span class="font-body-sm text-body-sm text-on-surface">Thumbs Up</span>
+                    </div>
+                    <span class="font-label-status text-label-status text-on-surface-variant">Next Slide</span>
+                  </div>
+                  <div class="flex items-center justify-between px-space-xs py-1 rounded bg-surface-container/60 hover:bg-surface-container-high transition-colors">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-primary-container text-body-sm">front_hand</span>
+                      <span class="font-body-sm text-body-sm text-on-surface">Point Finger</span>
+                    </div>
+                    <span class="font-label-status text-label-status text-on-surface-variant">Air Laser</span>
+                  </div>
+                  <div class="flex items-center justify-between px-space-xs py-1 rounded bg-surface-container/60 hover:bg-surface-container-high transition-colors">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-primary-container text-body-sm">pinch</span>
+                      <span class="font-body-sm text-body-sm text-on-surface">Pinch In/Out</span>
+                    </div>
+                    <span class="font-label-status text-label-status text-on-surface-variant">Spatial Zoom</span>
+                  </div>
+                  <div class="flex items-center justify-between px-space-xs py-1 rounded bg-surface-container/60 hover:bg-surface-container-high transition-colors">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-primary-container text-body-sm">pan_tool_alt</span>
+                      <span class="font-body-sm text-body-sm text-on-surface">Two Fingers Up</span>
+                    </div>
+                    <span class="font-label-status text-label-status text-on-surface-variant">Notes HUD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE HEALTH & AUDIO MONITOR -->
+            <div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm border border-surface-container-highest/30">
+              <div class="flex items-center justify-between">
+                <span class="font-label-hud text-label-hud text-on-surface uppercase tracking-wider">STAGE ENVIRONMENT</span>
+                <span class="w-2 h-2 rounded-full bg-tertiary-fixed"></span>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <div class="flex justify-between font-label-status text-label-status text-on-surface-variant">
+                  <span>MIC GAIN LEVEL</span>
+                  <span class="text-tertiary-fixed">-4.8 dB (OK)</span>
+                </div>
+                <div class="flex gap-1 h-2">
+                  <span class="w-1/6 bg-tertiary-fixed rounded-sm"></span>
+                  <span class="w-1/6 bg-tertiary-fixed rounded-sm"></span>
+                  <span class="w-1/6 bg-tertiary-fixed rounded-sm"></span>
+                  <span class="w-1/6 bg-tertiary-fixed rounded-sm"></span>
+                  <span class="w-1/6 bg-surface-container-highest rounded-sm"></span>
+                  <span class="w-1/6 bg-surface-container-highest rounded-sm"></span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs text-on-surface-variant font-label-status text-label-status border-t border-surface-container-highest/50">
+                <span>AUDIO INTERFACE</span>
+                <span class="text-primary-container font-bold">CONNECTED</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- INTERACTIVE SCRIPTS -->
+      <script>
+        // Air Laser Pointer interactive simulation
+        const stage = document.getElementById('slide-stage');
+        const laserDot = document.getElementById('laser-dot');
+        let laserActive = true;
+
+        if (stage && laserDot) {
+          stage.addEventListener('mousemove', (e) => {
+            if (!laserActive) return;
+            const rect = stage.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            laserDot.style.left = `${x}px`;
+            laserDot.style.top = `${y}px`;
+          });
+        }
+
+        // Toggle Air Laser button
+        const laserBtn = document.getElementById('btn-laser');
+        if (laserBtn && laserDot) {
+          laserBtn.addEventListener('click', () => {
+            laserActive = !laserActive;
+            laserDot.style.display = laserActive ? 'block' : 'none';
+            if (laserActive) {
+              laserBtn.classList.add('bg-primary-container/20', 'text-primary');
+            } else {
+              laserBtn.classList.remove('bg-primary-container/20', 'text-primary');
+            }
+          });
+        }
+
+        // Slide navigation feedback
+        const prevBtn = document.getElementById('slide-prev');
+        const nextBtn = document.getElementById('slide-next');
+        if (prevBtn && nextBtn) {
+          prevBtn.addEventListener('click', () => {
+            stage.classList.add('opacity-80');
+            setTimeout(() => stage.classList.remove('opacity-80'), 150);
+          });
+          nextBtn.addEventListener('click', () => {
+            stage.classList.add('opacity-80');
+            setTimeout(() => stage.classList.remove('opacity-80'), 150);
+          });
+        }
+
+        // Blackout button toggle
+        const blackoutBtn = document.getElementById('btn-blackout');
+        let blackoutActive = false;
+        if (blackoutBtn && stage) {
+          blackoutBtn.addEventListener('click', () => {
+            blackoutActive = !blackoutActive;
+            stage.style.filter = blackoutActive ? 'brightness(0)' : 'brightness(1)';
+            blackoutBtn.classList.toggle('bg-error-container', blackoutActive);
+          });
+        }
+      </script>
+    </main>
+
+    <!-- BOTTOM FLOATING HUD CONTROLS -->
+    <div class="fixed bottom-4 left-64 right-0 z-40 flex justify-center pointer-events-none">
+      <div class="pointer-events-auto bg-surface-container-lowest/90 backdrop-blur-2xl px-space-lg py-space-sm rounded-full shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center gap-space-md border border-surface-container-highest/30">
+        <div class="flex items-center gap-space-xs">
+          <button class="w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-body-lg">chevron_left</span>
+          </button>
+          <div class="px-space-sm font-label-hud text-label-hud text-on-surface">14 / 42</div>
+          <button class="w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-body-lg">chevron_right</span>
+          </button>
+        </div>
+        <div class="w-px h-6 bg-surface-container-highest"></div>
+        <div class="flex items-center gap-space-xs">
+          <button class="px-space-md py-1.5 rounded-full bg-primary-container text-on-primary font-label-hud text-label-hud flex items-center gap-1 shadow-[0_0_12px_rgba(0,240,255,0.4)]">
+            <span class="material-symbols-outlined text-body-md">adjust</span>LASER
+          </button>
+          <button class="px-space-md py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-hud text-label-hud flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined text-body-md">draw</span>DRAW
+          </button>
+          <button class="px-space-md py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-hud text-label-hud flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined text-body-md">notes</span>NOTES
+          </button>
+        </div>
+        <div class="w-px h-6 bg-surface-container-highest"></div>
+        <div class="flex items-center gap-space-sm text-tertiary-fixed font-label-status text-label-status">
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-body-md">mic</span>ON
+          </span>
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-body-md">videocam</span>4K60
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
